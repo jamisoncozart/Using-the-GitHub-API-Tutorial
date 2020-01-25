@@ -94,6 +94,10 @@ After the download is complete, `Unzip` the downloaded file and move it to any f
 
 Now finally we can make our way over to the `scripts.js` file which should reside in your `js` folder. Here we can start making our GitHub API requests.
 
+To make our first request using JavaScript, we will use jQueries built-in `$.get()` method to make a `GET` request to GitHub's API.
+```
+
+```
 
 
 Sentence to tie in next topic (conclusion sentence)

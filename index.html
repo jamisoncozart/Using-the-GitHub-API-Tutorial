@@ -4,25 +4,35 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/jquery.js"></script>
   <script src="js/scripts.js"></script>
   <title>Github API Practice</title>
 </head>
 <body>
-  <h1>Github API Practice</h1>
-  <hr>
-  <div class="projectPanel">
-    <div class="star-div">
-      <img src="pics/star.png" alt="Picture of Star icon">
-      <p id="repoStars"></p>
-    </div>
-    <h2 id="repoTitle">Repo Title</h2>
+  <div class="container">
+    <h1>Github API Practice</h1>
     <hr>
-    <p><strong>Description: </strong><span id="repoDescription"></span></p>
-    <h3>Languages Used:</h3>
-    <ul id="repoLanguageList">
-    </ul>
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="projectPanel panel panel-primary">
+          <div class="panel-heading">
+            <h2 id="repoTitle">Repo Title</h2>
+          </div>
+          <div class="panel-body">
+            <div class="star-div">
+              <img src="img/star.png" alt="Picture of Star icon">
+              <p id="repoStars"></p>
+            </div>
+            <p><strong>Description: </strong><span id="repoDescription"></span></p>
+            <h3>Languages Used:</h3>
+            <ul id="repoLanguageList">
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-  
-
 </body>
 </html>

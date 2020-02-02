@@ -108,11 +108,11 @@ $.get("https://api.github.com/users/jamisoncozart/repos?per_page=100", function(
   console.log(data);
 })
 ```
-As you probably guessed, the `$.get()` jQuery method takes up to 4 parameters, but we will only work with 2 here. The first parameter is our `GET` request URL, and the second is a [Callback Function](https://developer.mozilla.org/en-US/docs/Glossary/Callback_function). This callback function is passed the GitHub API response data by passing a single parameter `data` to our callback function.
+As you probably guessed, the [$.get() jQuery method](https://api.jquery.com/jquery.get/) takes 2 parameters for our example, but has options to pass more parameters when necessary. The first parameter is our `GET` request URL, and the second is a [Callback Function](https://developer.mozilla.org/en-US/docs/Glossary/Callback_function). This callback function is given the GitHub API response data which is stored in the `data` variable that is passed to our callback function.
+
+After typing/copying this code into your `scripts.js` file, open your `index.html` file in your browser (Chrome preferred) and navigate to the console using the shortcut `Shift + CTRL + J`, or right-clicking on the page and clicking `Inspect`, then clicking on `Console` at the top of the menu that pops up. If you want to see the request in action, `Refresh` the page, and you should see the `JSON` response printed to the console.
 
 When we reference our `data` parameter in our callback function and `console.log()` it, we can view it in our browser's console.
-
-After typing/copying this code into your `scripts.js` file, open your `index.html` file in your browser (Chrome preferred) and navigate to the console using the shortcut `Shift + CTRL + J`, or right-clicking on the page and clicking `inspect`, then clicking on `Console` at the top of the menu that pops up. If you want to see the request in action, `Refresh` the page, and you should see the `JSON` response printed to the console.
 
 This is great! The request we made is returning us an array of objects, with each object reference each repository on our GitHub!
 
@@ -124,23 +124,155 @@ $.get(url, function(data) {
   console.log(data);
 })
 ```
-So as you have just witnessed, making requests to the GitHub API is quite a simple task. Knowing what URL you need to make a request to is half the battle. In the next section we will traverse the great `JSON` response array, and pull out some data we can use for our website.
+So as you have just seen, making requests to the GitHub API is quite a simple task. Knowing what URL you need to make a request to is half the battle. In the next section we will traverse the great `JSON` response array, and pull out some data we can use for our website.
 
-## __How to Traverse Objects__
+## __How to Traverse JSON__
 <hr>
 
-Intro sentence
-Sentence to tie in next topic (conclusion sentence)
+Objects are some of Javascript's most useful data types, allowing for storage of large amounts of relational data inside a single object. The JSON we are recieving from our GitHub API request comes in a commonly used data structure in JavaScript: an array of objects. Openning our index.html in the browser and navigating to the console, we see something like this:
+```javascript
+Array(71)
+```
+If you click on this text in the console, you will see that at each index of this array, there is an object that represents one GitHub repository from your profile. Here is what a single post object looks like from this array of post objects:
+```javascript
+0:
+  id: 234202384
+  node_id: "MDEwOlJlcG9zaXRvcnkyMzQyMDIzODQ="
+  name: "address-book"
+  full_name: "jamisoncozart/address-book"
+  private: false
+  owner: {login: "jamisoncozart", id: 56237239, node_id: "MDQ6VXNlcjU2MjM3MjM5", avatar_url: "https://avatars0.githubusercontent.com/u/56237239?v=4", gravatar_id: "", …}
+  html_url: "https://github.com/jamisoncozart/address-book"
+  description: null
+  fork: false
+  url: "https://api.github.com/repos/jamisoncozart/address-book"
+  forks_url: "https://api.github.com/repos/jamisoncozart/address-book/forks"
+  keys_url: "https://api.github.com/repos/jamisoncozart/address-book/keys{/key_id}"
+  collaborators_url: "https://api.github.com/repos/jamisoncozart/address-book/collaborators{/collaborator}"
+  teams_url: "https://api.github.com/repos/jamisoncozart/address-book/teams"
+  hooks_url: "https://api.github.com/repos/jamisoncozart/address-book/hooks"
+  issue_events_url: "https://api.github.com/repos/jamisoncozart/address-book/issues/events{/number}"
+  events_url: "https://api.github.com/repos/jamisoncozart/address-book/events"
+  assignees_url: "https://api.github.com/repos/jamisoncozart/address-book/assignees{/user}"
+  branches_url: "https://api.github.com/repos/jamisoncozart/address-book/branches{/branch}"
+  tags_url: "https://api.github.com/repos/jamisoncozart/address-book/tags"
+  blobs_url: "https://api.github.com/repos/jamisoncozart/address-book/git/blobs{/sha}"
+  git_tags_url: "https://api.github.com/repos/jamisoncozart/address-book/git/tags{/sha}"
+  git_refs_url: "https://api.github.com/repos/jamisoncozart/address-book/git/refs{/sha}"
+  trees_url: "https://api.github.com/repos/jamisoncozart/address-book/git/trees{/sha}"
+  statuses_url: "https://api.github.com/repos/jamisoncozart/address-book/statuses/{sha}"
+  languages_url: "https://api.github.com/repos/jamisoncozart/address-book/languages"
+  stargazers_url: "https://api.github.com/repos/jamisoncozart/address-book/stargazers"
+  contributors_url: "https://api.github.com/repos/jamisoncozart/address-book/contributors"
+  subscribers_url: "https://api.github.com/repos/jamisoncozart/address-book/subscribers"
+  subscription_url: "https://api.github.com/repos/jamisoncozart/address-book/subscription"
+  commits_url: "https://api.github.com/repos/jamisoncozart/address-book/commits{/sha}"
+  git_commits_url: "https://api.github.com/repos/jamisoncozart/address-book/git/commits{/sha}"
+  comments_url: "https://api.github.com/repos/jamisoncozart/address-book/comments{/number}"
+  issue_comment_url: "https://api.github.com/repos/jamisoncozart/address-book/issues/comments{/number}"
+  contents_url: "https://api.github.com/repos/jamisoncozart/address-book/contents/{+path}"
+  compare_url: "https://api.github.com/repos/jamisoncozart/address-book/compare/{base}...{head}"
+  merges_url: "https://api.github.com/repos/jamisoncozart/address-book/merges"
+  archive_url: "https://api.github.com/repos/jamisoncozart/address-book/{archive_format}{/ref}"
+  downloads_url: "https://api.github.com/repos/jamisoncozart/address-book/downloads"
+  issues_url: "https://api.github.com/repos/jamisoncozart/address-book/issues{/number}"
+  pulls_url: "https://api.github.com/repos/jamisoncozart/address-book/pulls{/number}"
+  milestones_url: "https://api.github.com/repos/jamisoncozart/address-book/milestones{/number}"
+  notifications_url: "https://api.github.com/repos/jamisoncozart/address-book/notifications{?since,all,participating}"
+  labels_url: "https://api.github.com/repos/jamisoncozart/address-book/labels{/name}"
+  releases_url: "https://api.github.com/repos/jamisoncozart/address-book/releases{/id}"
+  deployments_url: "https://api.github.com/repos/jamisoncozart/address-book/deployments"
+  created_at: "2020-01-16T00:43:18Z"
+  updated_at: "2020-01-16T03:39:47Z"
+  pushed_at: "2020-01-16T03:39:45Z"
+  git_url: "git://github.com/jamisoncozart/address-book.git"
+  ssh_url: "git@github.com:jamisoncozart/address-book.git"
+  clone_url: "https://github.com/jamisoncozart/address-book.git"
+  svn_url: "https://github.com/jamisoncozart/address-book"
+  homepage: null
+  size: 104
+  stargazers_count: 0
+  watchers_count: 0
+  language: "HTML"
+  has_issues: true
+  has_projects: true
+  has_downloads: true
+  has_wiki: true
+  has_pages: false
+  forks_count: 0
+  mirror_url: null
+  archived: false
+  disabled: false
+  open_issues_count: 0
+  license: null
+  forks: 0
+  open_issues: 0
+  watchers: 0
+  default_branch: "master"
+  __proto__: Object
+```
+This is the object returned to me at index 0 of the array of repository objects the GitHub API responded with when I made my repositories request. There is some great data immediately available to us in this object. The `name:` key and `html_url:` key would be very useful to us if we wanted to display the name of our repository and make a clickable link to the URL of the repository. `description:`, `stargazers_count:`, and `languages_url:` will also be useful to us in displaying project data.
 
-### How to sort your GitHub data
+Now that we have our GitHub data in JSON format, we need to loop through all of our GitHub repositories and sort our repositories. By default, the respository list comes sorted alphabetically, however, we can use `stargazers_count` to sort our repositories by number of stars, showing our most popular repositories first. Here's a few additional lines of code that takes advantage of the `Array.prototype.sort()` method:
+```javascript
+var sortedRepos = data.sort(function(a,b) {
+    return parseFloat(b.stargazers_count) - parseFloat(a.stargazers_count);
+});
+```
+The `sort()` array method takes a callback function, loops through our entire array of repository objects comparing each repo to the next one, and sorts the array values based on the return value of the callback function. In this case, `a` and `b` represent the current array object, and the next array object respectively. If the callback function returns a number less than `0`, `a` will be sorted to an index lower than `b`. If the callback function returns `0`, the order of `a` and `b` remain unchanged. Finally, if the callback function returns a number greater than `0`, `b` will be sorted to an index lower than `a`. If you wish to look into this method further, MDN has some great documentation on [Array.prototype.sort()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort).
 
-Intro sentence
-Sentence to tie in next topic (conclusion sentence)
+Now that we have our array sorted, we can simply grab the object at the first index of our array. Here's what we should have so far:
+```javascript
+var url = "https://api.github.com/users/jamisoncozart/repos?per_page=100";
+
+$.get(url, function(data) {
+  var sortedRepos = data.sort(function(a,b) {
+    return parseFloat(b.stargazers_count) - parseFloat(a.stargazers_count);
+  });
+  console.log(sortedRepos[0]);
+})
+```
+If you open up the console, you will now see the object of your repository with the most stars printed to the console. Grabbing some of the relavant data directly from this object, we can console.log the object data like this:
+```javascript
+var url = "https://api.github.com/users/jamisoncozart/repos?per_page=100";
+
+$.get(url, function(data) {
+  var sortedRepos = data.sort(function(a,b) {
+    return parseFloat(b.stargazers_count) - parseFloat(a.stargazers_count);
+  });
+  console.log(sortedRepos[0].name);
+  console.log(sortedRepos[0].description);
+  console.log(sortedRepos[0].html_url);
+  console.log(sortedRepos[0].stargazers_count);
+})
+```
+As you can see if you have the console open, accessing the values stored in our GitHub repository objects is as simple as appending a `.name` or `.description` to our repository object. If you want to read more about working with objects, MDN is again here to [save the day](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_Objects).
+
+Finally, just to clean up our code and use more recent JavaScript syntax, we can replace our callback function with an Arrow Function to use ES6 syntax:
+```javascript
+var url = "https://api.github.com/users/jamisoncozart/repos?per_page=100";
+
+$.get(url, function(data) {
+  var sortedRepos = data.sort((a,b) => parseFloat(b.stargazers_count) - parseFloat(a.stargazers_count));
+  var repoName = sortedRepos[0].name;
+  var repoDescription = sortedRepos[0].description;
+  var repoLink = sortedRepos[0].html_url;
+  var repoStars = sortedRepos[0].stargazers_count;
+})
+```
+Arrow functions are a sleek way to condense this callback function onto a single line. Check out MDN's documentation on [Arrow function expressions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions). I have also stored all our important data into variables.
+
+Now that we have grabbed most of our data, we can focus on adding this data to our HTML document, and displaying it on our webpage for the world to see.
 
 ### How to insert data into your HTML
 
 Intro sentence
 Sentence to tie in next topic (conclusion sentence)
+
+### Making nested requests
+
+Intro
+Conclusion
 
 ### Further Exploration
 

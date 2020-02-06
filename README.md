@@ -267,7 +267,37 @@ Now that we have grabbed most of our data, we can focus on adding this data to o
 ### How to insert data into your HTML
 
 Intro sentence
-Sentence to tie in next topic (conclusion sentence)
+
+The DOM or the [Document Object Model](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model) allows developers to call upon and manipulate elements of the webpage rendered in HTML and CSS, bridging the gap between scripts and webpages. To manipulate the DOM to our advantage, we will use the [jQuery](https://api.jquery.com/) library to grab the HTML elements by their ids and change the innerHTML of them to the repository data we are pulling form GitHub. First lets grab all of our elements we want to add new text to. To do this, we need to wait for the DOM or the `document` to be `ready` before we can call on any of the DOM elements:
+```javascript
+$(document).ready(function() {
+  $("#repoLink")
+  $("#repoTitle")
+  $("#repoStars")
+  $("#repoDescription")
+})
+```
+This will grab all of our DOM elements by their ids (denoted by the `#<id name>`). Now we need to add our newly retrieved repository data to these elements. We will need to add our entire `$(document).ready()` function inside our `$.get()` function to access our repo data:
+```javascript
+var url = "https://api.github.com/users/jamisoncozart/repos?per_page=100";
+
+$.get(url, function(data) {
+  var sortedRepos = data.sort((a,b) => parseFloat(b.stargazers_count) - parseFloat(a.stargazers_count));
+  var repoName = sortedRepos[0].name;
+  var repoDescription = sortedRepos[0].description;
+  var repoLink = sortedRepos[0].html_url;
+  var repoStars = sortedRepos[0].stargazers_count;
+  $(document).ready(function() {
+    $("#repoLink").attr('href', repoLink);
+    $("#repoTitle").html(repoName);
+    $("#repoStars").html(repoStars);
+    $("#repoDescription").html(repoDescription);
+  })
+})
+```
+If you look at our index.html page in your browser, you will now see that the github repository information for your top repository (sorted by stars) is displayed in the HTML for our project panel!
+
+The last step of the process is retrieving data to place in the 'Languages Used:' section of our project panel. If you look back through the JSON object response the GitHub API sent back to us, you will not find any data on the specific languages we used, but instead a `languages_url:` link. They can't make it _that_ easy right? In reality, the JSON object contains tons of GitHub API urls, which can all be accessed by using more GitHub API requests.
 
 ### Making nested requests
 

@@ -6,4 +6,11 @@ $.get(url, function(data) {
   var repoDescription = sortedRepos[0].description;
   var repoLink = sortedRepos[0].html_url;
   var repoStars = sortedRepos[0].stargazers_count;
+  $(document).ready(function() {
+    $("#repoLink").attr('href', repoLink);
+    $("#repoTitle").html(repoName);
+    $("#repoStars").html(repoStars);
+    $("#repoDescription").html(repoDescription);
+    // $("#repoLanguageList")
+  })
 })

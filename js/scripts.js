@@ -11,6 +11,5 @@ $.get(url, function(data) {
     $("#repoTitle").html(repoName);
     $("#repoStars").html(repoStars);
     $("#repoDescription").html(repoDescription);
-    // $("#repoLanguageList")
   })
 })

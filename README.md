@@ -264,8 +264,8 @@ Arrow functions are a sleek way to condense this callback function onto a single
 
 Now that we have grabbed most of our data, we can focus on adding this data to our HTML document, and displaying it on our webpage for the world to see.
 
-### How to insert data into your HTML
-
+## __How to insert data into your HTML__
+<hr>
 Intro sentence
 
 The DOM or the [Document Object Model](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model) allows developers to call upon and manipulate elements of the webpage rendered in HTML and CSS, bridging the gap between scripts and webpages. To manipulate the DOM to our advantage, we will use the [jQuery](https://api.jquery.com/) library to grab the HTML elements by their ids and change the innerHTML of them to the repository data we are pulling form GitHub. First lets grab all of our elements we want to add new text to. To do this, we need to wait for the DOM or the `document` to be `ready` before we can call on any of the DOM elements:
@@ -299,15 +299,41 @@ If you look at our index.html page in your browser, you will now see that the gi
 
 The last step of the process is retrieving data to place in the 'Languages Used:' section of our project panel. If you look back through the JSON object response the GitHub API sent back to us, you will not find any data on the specific languages we used, but instead a `languages_url:` link. They can't make it _that_ easy right? In reality, the JSON object contains tons of GitHub API urls, which can all be accessed by using more GitHub API requests.
 
-### Making nested requests
+## __Making nested requests__
+<hr>
 
 Intro
-Conclusion
+To retrieve our project _languages used_, lets write a new request specifically to the URL we found in our JSON object:
+```
 
-### Further Exploration
+```
+While this is definitely possible, we are already receiving the URL for this API request inside the first JSON response object for our project. Because of this, we can refactor our code to use a nested request to access the `languages_url`:
+```
 
-Intro sentence
-Challenge: Add percents to each language used based on data from “languages used” link.
-Example of very impressive data visualization using the GitHub API and chart.js
-https://profile-summary-for-github.com/search
-Sentence to tie in next topic (conclusion sentence)
+```
+Now that we have our data from the API, lets use more jQuery to finalize our project panel with our _languages used_ data:
+```
+
+```
+For many APIs, this is a common workflow: making requests, parsing the JSON response object, storing the data you want, then doing something with that data. Now that you know how easy it is to use the GitHub API to retrieve anyone's profile data and repository information, consider some further exploration to get more practice with making API requests and using other features of GitHub's API.
+
+## __Further Exploration__
+<hr>
+
+**Challenge:** 
+Using the GitHub API, add percents to each language used in your project based on the data from `languages_url` API link.
+
+## __Example Projects__
+<hr>
+
+You can find a completed version of this project in associated with my _Personal Portfolio_ found [Here](https://jamisoncozart.github.io/portfolio-page/)
+
+### __Closing Remarks__
+<hr>
+If you enjoyed this article and found it useful, please consider starring this repository and sharing it with anyone you think would find it useful.
+
+If you have any further comments, improvements, or constructive criticism, feel free to email me at: jamisoncozart@gmail.com
+
+<hr>
+
+&copy; 2020 - Jamison Cozart

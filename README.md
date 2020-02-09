@@ -304,15 +304,15 @@ The last step of the process is retrieving data to place in the 'Languages Used:
 
 Intro
 To retrieve our project _languages used_, lets write a new request specifically to the URL we found in our JSON object:
-```
+```javascript
 
 ```
 While this is definitely possible, we are already receiving the URL for this API request inside the first JSON response object for our project. Because of this, we can refactor our code to use a nested request to access the `languages_url`:
-```
+```javascript
 
 ```
 Now that we have our data from the API, lets use more jQuery to finalize our project panel with our _languages used_ data:
-```
+```javascript
 
 ```
 For many APIs, this is a common workflow: making requests, parsing the JSON response object, storing the data you want, then doing something with that data. Now that you know how easy it is to use the GitHub API to retrieve anyone's profile data and repository information, consider some further exploration to get more practice with making API requests and using other features of GitHub's API.

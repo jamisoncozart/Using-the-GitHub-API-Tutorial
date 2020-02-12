@@ -7,7 +7,6 @@ ___By Jamison Cozart___
 As a beginner dev like myself, you probably have a simple portfolio page showcasing your projects and previous work experience. You’ve taken the time to meticulously add the project titles, the description, and even the languages used for each of your projects. But if you’re like me you’ve also realized the arduous task of continually updating these projects with the newer and improved projects you will continue to make through your journey as a developer. I’m writing this article, as my first blog post ever, to show you the beauty and simplicity of using GitHub’s API’s to your advantage.
 
 ## __The GitHub API__
-<hr>
 
 For anyone unfamiliar with the term, API stands for Application Programming Interface. The term API is thrown around a lot in the developer community, and can represent a wide variety of different software interfaces. Because of this, I will not spend too much time explaining, and instead link to the [Wikipedia page](https://en.wikipedia.org/wiki/Application_programming_interface) for your further reading. The basic purpose of an API is for software programs to easily communicate and exchange data between one another. Fortunately for all developers GitHub has a fantastic, simple-to-use API that we can use to access the data from each of our project repositories in seconds. If you’re more like me, you might prefer to read the [Official Documentation](https://developer.github.com/v3/).
 
@@ -16,7 +15,6 @@ If you’ve ever looked for Github’s official mobile app, you’ll find that o
 An Application Programming Interface might sound like some really complex software, but digging just beneath the surface, you’ll find that requesting your GitHub data is much simpler than you thought.
 
 ## __How to make API calls__
-<hr>
 
 So how do we actually interact with this ominous GitHub API? To start, lets open our __terminal (Mac)__ or __Git Bash (Windows)__ and make a simple API call. __Replace `jamisoncozart` with your own GitHub username__:
 ```bash
@@ -75,7 +73,6 @@ The GitHub API uses a data type called [JSON](https://www.w3schools.com/whatis/w
 Lets start by making sure you have all the files you need to make this work. I’m going to keep this as simple as possible to start.
 
 ### __Setting up the Project__
-<hr>
 
 ### __Option 1__
 
@@ -93,7 +90,6 @@ After this, open this project in your preferred text-editor. For VSCode, simply 
 ```
 code .
 ```
-<hr>
 
 ### __Option 2__
 
@@ -102,8 +98,6 @@ __Using GitHub__
 To download the .zip file manually, navigate to the top of this repository page and click the `Clone or download` button. Then press `Download ZIP`.
 
 After the download is complete, `Unzip` the downloaded file and move it to any file location you want. Finally, open `VSCode` or your preferred text-editor and `Open` the unzipped folder you just downloaded.
-
-<hr>
 
 __This will give you all the files you need to get started with this project.__
 ### __The JavaScript__
@@ -135,7 +129,6 @@ $.get(url, function(data) {
 So as you have just seen, making requests to the GitHub API is quite a simple task. Knowing what URL you need to make a request to is half the battle. In the next section we will traverse the great `JSON` response array, and pull out some data we can use for our website.
 
 ## __How to Traverse JSON__
-<hr>
 
 Objects are some of Javascript's most useful data types, allowing for storage of large amounts of relational data inside a single object. The JSON we are recieving from our GitHub API request comes in a commonly used data structure in JavaScript: an array of objects. Openning our index.html in the browser and navigating to the console, we see something like this:
 ```javascript
@@ -273,7 +266,6 @@ Arrow functions are a sleek way to condense this callback function onto a single
 Now that we have grabbed most of our data, we can focus on adding this data to our HTML document, and displaying it on our webpage for the world to see.
 
 ## __How to insert data into your HTML__
-<hr>
 
 The DOM or the [Document Object Model](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model) allows developers to call upon and manipulate elements of the webpage rendered in HTML and CSS, bridging the gap between scripts and webpages. To manipulate the DOM to our advantage, we will use the [jQuery](https://api.jquery.com/) library to grab the HTML elements by their `id`s and change the innerHTML of them to the repository data we are pulling form GitHub. First lets grab all of our elements we want to add new text to. To do this, we need to wait for the DOM or the `document` to be `ready` before we can call on any of the DOM elements:
 ```javascript
@@ -307,7 +299,6 @@ If you look at our index.html page in your browser, you will now see that the gi
 The last step of the process is retrieving data to place in the 'Languages Used:' section of our project panel. If you look back through the JSON object response the GitHub API sent back to us, you will not find any data on the specific languages we used, but instead a `languages_url:` link. They can't make it _that_ easy right? In reality, the JSON object contains tons of GitHub API urls, which can all be accessed by using more GitHub API requests.
 
 ## __Making nested requests__
-<hr>
 
 To retrieve our project _languages used_, lets write a new request specifically to the URL we found in our JSON object:
 ```javascript
@@ -386,7 +377,6 @@ For many APIs, this is a common workflow:
 Now that you know how easy it is to use the GitHub API to retrieve anyone's profile data and repository information, consider some further exploration to get more practice with making API requests and using other features of GitHub's API.
 
 ## __Further Exploration__
-<hr>
 
 ### **Challenges:** 
 1. Using the GitHub API, add percents to each language used in your project based on the data from `languages_url` API link.
@@ -399,7 +389,6 @@ Now that you know how easy it is to use the GitHub API to retrieve anyone's prof
 * [AJAX using jQuery](https://api.jquery.com/jquery.ajax/)
 
 ## __Example Projects__
-<hr>
 
 Checkout my _Personal Portfolio_ found [Here](https://jamisoncozart.github.io/portfolio-page/)
 

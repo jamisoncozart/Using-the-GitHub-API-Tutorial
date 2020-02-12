@@ -1,5 +1,7 @@
 # __Automating a Web Page to Show Off Your Top GitHub Repositories__
 ## **A beginner’s guide to using GitHub’s API for your personal portfolio page**
+_11 February 2020_
+
 ___By Jamison Cozart___
 
 As a beginner dev like myself, you probably have a simple portfolio page showcasing your projects and previous work experience. You’ve taken the time to meticulously add the project titles, the description, and even the languages used for each of your projects. But if you’re like me you’ve also realized the arduous task of continually updating these projects with the newer and improved projects you will continue to make through your journey as a developer. I’m writing this article, as my first blog post ever, to show you the beauty and simplicity of using GitHub’s API’s to your advantage.
@@ -7,7 +9,7 @@ As a beginner dev like myself, you probably have a simple portfolio page showcas
 ## __The GitHub API__
 <hr>
 
-For anyone unfamiliar with the term, API stands for Application Programming Interface. The term API is thrown around a lot in the developer community, and can represent a wide variety of different software interfaces. Because of this, I will not spend too much time explaining, and instead link to the [Wikipedia page](https://en.wikipedia.org/wiki/Application_programming_interface) for your further reading. The basic purpose of an API is for software programs to easily communicate and exchange data between one another. Fortunately for all developers GitHub has a fantastically simple API that we can use to access the data from each of our project repositories in seconds. If you’re more like me, you might prefer to read the [Official Documentation](https://developer.github.com/v3/).
+For anyone unfamiliar with the term, API stands for Application Programming Interface. The term API is thrown around a lot in the developer community, and can represent a wide variety of different software interfaces. Because of this, I will not spend too much time explaining, and instead link to the [Wikipedia page](https://en.wikipedia.org/wiki/Application_programming_interface) for your further reading. The basic purpose of an API is for software programs to easily communicate and exchange data between one another. Fortunately for all developers GitHub has a fantastic, simple-to-use API that we can use to access the data from each of our project repositories in seconds. If you’re more like me, you might prefer to read the [Official Documentation](https://developer.github.com/v3/).
 
 If you’ve ever looked for Github’s official mobile app, you’ll find that only a Beta version exists for both iOS and Android (as of January 22nd, 2020). Instead when you search for GitHub on your respective app stores, you’ll find multiple 3rd party GitHub apps you can download. Most, if not all of these 3rd party apps interact with GitHub’s API to pull the data from all of GitHub at your request. Another simpler example would be [David Ase’s Profile Summary for GitHub](https://profile-summary-for-github.com/search) which requests any users GitHub data by making requests to GitHub’s API and visualizing the data using a javascript library called chart.js. 
 
@@ -16,7 +18,7 @@ An Application Programming Interface might sound like some really complex softwa
 ## __How to make API calls__
 <hr>
 
-So how do we actually interact with this ominous GitHub API? To start, lets open our __terminal (Mac)__ or __Git Bash (Windows)__ and make a simple API call. Replace `jamisoncozart` with your own GitHub username:
+So how do we actually interact with this ominous GitHub API? To start, lets open our __terminal (Mac)__ or __Git Bash (Windows)__ and make a simple API call. __Replace `jamisoncozart` with your own GitHub username__:
 ```bash
 curl -i https://api.github.com/users/jamisoncozart
 ```
@@ -72,6 +74,7 @@ The GitHub API uses a data type called [JSON](https://www.w3schools.com/whatis/w
 
 Lets start by making sure you have all the files you need to make this work. I’m going to keep this as simple as possible to start.
 
+### __Setting up the Project__
 <hr>
 
 ### __Option 1__
@@ -100,7 +103,7 @@ After the download is complete, `Unzip` the downloaded file and move it to any f
 
 ### __The JavaScript__
 
-Now finally we can make our way over to the `scripts.js` file which should reside in your `js` folder. Here we can start making our GitHub API requests.
+Now we can finally make our way over to the `scripts.js` file which should reside in your `js` folder. Here we can start making our GitHub API requests.
 
 To make our first request using JavaScript, we will use jQueries built-in `$.get()` method to make a `GET` request to GitHub's API.
 ```javascript
@@ -114,9 +117,9 @@ After typing/copying this code into your `scripts.js` file, open your `index.htm
 
 When we reference our `data` parameter in our callback function and `console.log()` it, we can view it in our browser's console.
 
-This is great! The request we made is returning us an array of objects, with each object reference each repository on our GitHub!
+This is great! The request we made is returning us an array of objects, with each object referencing each repository on our GitHub!
 
-Before we move on to filtering out the data we want from this `data` array of objects, lets clean up our code slightly to make it easier to understand:
+Before we move on to filtering out the data we want from this `data` array of objects, lets clean up our code slightly to make it easier to read:
 ```javascript
 var url = "https://api.github.com/users/jamisoncozart/repos?per_page=100";
 
@@ -211,7 +214,7 @@ If you click on this text in the console, you will see that at each index of thi
   default_branch: "master"
   __proto__: Object
 ```
-This is the object returned to me at index 0 of the array of repository objects the GitHub API responded with when I made my repositories request. There is some great data immediately available to us in this object. The `name:` key and `html_url:` key would be very useful to us if we wanted to display the name of our repository and make a clickable link to the URL of the repository. `description:`, `stargazers_count:`, and `languages_url:` will also be useful to us in displaying project data.
+This is the object returned to me at index 0 of the array of repository objects the GitHub API responded with when I made my repositories request. There is some great data immediately available to us in this object. The `name:` key and `html_url:` key would be very useful to us if we wanted to display the name of our repository and make a clickable link to the URL of the repository. `description`, `stargazers_count`, and `languages_url` will also be useful to us in displaying project data.
 
 Now that we have our GitHub data in JSON format, we need to loop through all of our GitHub repositories and sort our repositories. By default, the respository list comes sorted alphabetically, however, we can use `stargazers_count` to sort our repositories by number of stars, showing our most popular repositories first. Here's a few additional lines of code that takes advantage of the `Array.prototype.sort()` method:
 ```javascript
@@ -266,9 +269,8 @@ Now that we have grabbed most of our data, we can focus on adding this data to o
 
 ## __How to insert data into your HTML__
 <hr>
-Intro sentence
 
-The DOM or the [Document Object Model](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model) allows developers to call upon and manipulate elements of the webpage rendered in HTML and CSS, bridging the gap between scripts and webpages. To manipulate the DOM to our advantage, we will use the [jQuery](https://api.jquery.com/) library to grab the HTML elements by their ids and change the innerHTML of them to the repository data we are pulling form GitHub. First lets grab all of our elements we want to add new text to. To do this, we need to wait for the DOM or the `document` to be `ready` before we can call on any of the DOM elements:
+The DOM or the [Document Object Model](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model) allows developers to call upon and manipulate elements of the webpage rendered in HTML and CSS, bridging the gap between scripts and webpages. To manipulate the DOM to our advantage, we will use the [jQuery](https://api.jquery.com/) library to grab the HTML elements by their `id`s and change the innerHTML of them to the repository data we are pulling form GitHub. First lets grab all of our elements we want to add new text to. To do this, we need to wait for the DOM or the `document` to be `ready` before we can call on any of the DOM elements:
 ```javascript
 $(document).ready(function() {
   $("#repoLink")
@@ -295,14 +297,13 @@ $.get(url, function(data) {
   })
 })
 ```
-If you look at our index.html page in your browser, you will now see that the github repository information for your top repository (sorted by stars) is displayed in the HTML for our project panel!
+If you look at our index.html page in your browser, you will now see that the github repository information for your top repository (sorted by stars) is displayed in the HTML for our project panel! You can read more on `$(document).ready()` [here](https://learn.jquery.com/using-jquery-core/document-ready/).
 
 The last step of the process is retrieving data to place in the 'Languages Used:' section of our project panel. If you look back through the JSON object response the GitHub API sent back to us, you will not find any data on the specific languages we used, but instead a `languages_url:` link. They can't make it _that_ easy right? In reality, the JSON object contains tons of GitHub API urls, which can all be accessed by using more GitHub API requests.
 
 ## __Making nested requests__
 <hr>
 
-Intro
 To retrieve our project _languages used_, lets write a new request specifically to the URL we found in our JSON object:
 ```javascript
 $.get("https://api.github.com/repos/jamisoncozart/address-book/languages", function(languageData) {
@@ -324,6 +325,7 @@ $.get(url, function(data) {
   let repoLink = sortedRepos[0].html_url;
   let repoStars = sortedRepos[0].stargazers_count;
   let languages = [];
+  //Nested Request
   $.get(sortedRepos[0].languages_url, function(languageData) {
     for(let i = 0; i < Object.keys(languageData).length; i++) {
       languages.push(Object.keys(languageData)[i]);
@@ -358,6 +360,7 @@ $.get(url, function(data) {
     $("#repoTitle").html(repoName);
     $("#repoStars").html(repoStars);
     $("#repoDescription").html(repoDescription);
+    //New Code
     let languageList = $("#repoLanguageList");
     setTimeout(function() {
       for(let i = 0; i < languages.length; i++) {
@@ -367,16 +370,22 @@ $.get(url, function(data) {
   });
 });
 ```
-Here we append a new `li` HTML element for each language inside out `languages` array. I have wrapped this code inside a `setTimeout()` function because we don't want our `languages` list to append until we have successfully retrieved our `languageData` from our nested request. Using `setTimeout()` without specifying a time as the second parameter will run our `for` loop after enough time has passed to recieve our `languageData` object before we try and append the data. You can read more on the different uses of the setTimeout() function [here](https://www.w3schools.com/jsref/met_win_settimeout.asp).
+Here we append a new `li` HTML element for each language inside our `languages` array. I have wrapped this code inside a `setTimeout()` function because we don't want our `languages` list to append until we have successfully retrieved our `languageData` from our nested request. Using `setTimeout()` without specifying a time as the second parameter will run our `for` loop after all other functions have run, and we have recieve our `languageData` object. You can read more on the different uses of the setTimeout() function and asynchronous code [here](https://www.w3schools.com/jsref/met_win_settimeout.asp).
 
-For many APIs, this is a common workflow: making requests, parsing the JSON response object, storing the data you want, then doing something with that data. Now that you know how easy it is to use the GitHub API to retrieve anyone's profile data and repository information, consider some further exploration to get more practice with making API requests and using other features of GitHub's API.
+For many APIs, this is a common workflow: 
+1. Make request.
+2. Parse the JSON response object.
+3. Store the data you want in variables.
+4. Do something with the data.
+
+Now that you know how easy it is to use the GitHub API to retrieve anyone's profile data and repository information, consider some further exploration to get more practice with making API requests and using other features of GitHub's API.
 
 ## __Further Exploration__
 <hr>
 
 ### **Challenges:** 
-* Using the GitHub API, add percents to each language used in your project based on the data from `languages_url` API link.
-* Create multiple project panels, and append the data for any number of your top repositories from the sorted GitHub API response list.
+1. Using the GitHub API, add percents to each language used in your project based on the data from `languages_url` API link.
+2. Create multiple project panels, and append the data for any number of your top repositories from the sorted GitHub API response list.
 
 ### __Other ways to make API requests__
 
@@ -399,7 +408,5 @@ If you have any further comments, improvements, or constructive criticism, feel 
 
 If you enjoyed this article and found it useful, please consider starring this repository and sharing it with anyone you think would find it useful.
 
-
-_Lisense: MIT_
 
 &copy; 2020 - Jamison Cozart

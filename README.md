@@ -84,11 +84,15 @@ __Using Git Bash (Windows) or Terminal (Mac)__
 The easiest way to get started is to clone this GitHub repo onto your desktop: 
 ```bash
 cd Desktop
-git clone https://github.com/jamisoncozart/Automating-GitHub-Repositories
+
+git clone https://github.com/jamisoncozart/Using-the-GitHub-API
+
+cd Using-the-GitHub-API
 ```
-
-This will give you all the files you need to get started with this project.
-
+After this, open this project in your preferred text-editor. For VSCode, simply type:
+```
+code .
+```
 <hr>
 
 ### __Option 2__
@@ -101,6 +105,7 @@ After the download is complete, `Unzip` the downloaded file and move it to any f
 
 <hr>
 
+__This will give you all the files you need to get started with this project.__
 ### __The JavaScript__
 
 Now we can finally make our way over to the `scripts.js` file which should reside in your `js` folder. Here we can start making our GitHub API requests.

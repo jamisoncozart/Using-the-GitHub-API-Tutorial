@@ -6,7 +6,7 @@ $.get(url, function(data) {
   let repoDescription = sortedRepos[0].description;
   let repoLink = sortedRepos[0].html_url;
   let repoStars = sortedRepos[0].stargazers_count;
-  let languages = []
+  let languages = [];
   $.get(sortedRepos[0].languages_url, function(languageData) {
     for(let i = 0; i < Object.keys(languageData).length; i++) {
       languages.push(Object.keys(languageData)[i]);

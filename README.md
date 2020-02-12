@@ -374,8 +374,9 @@ For many APIs, this is a common workflow: making requests, parsing the JSON resp
 ## __Further Exploration__
 <hr>
 
-**Challenge:** 
-Using the GitHub API, add percents to each language used in your project based on the data from `languages_url` API link.
+### **Challenges:** 
+* Using the GitHub API, add percents to each language used in your project based on the data from `languages_url` API link.
+* Create multiple project panels, and append the data for any number of your top repositories from the sorted GitHub API response list.
 
 ### __Other ways to make API requests__
 
@@ -386,14 +387,19 @@ Using the GitHub API, add percents to each language used in your project based o
 ## __Example Projects__
 <hr>
 
-You can find a completed version of this project in associated with my _Personal Portfolio_ found [Here](https://jamisoncozart.github.io/portfolio-page/)
+Checkout my _Personal Portfolio_ found [Here](https://jamisoncozart.github.io/portfolio-page/)
 
-### __Closing Remarks__
+## __Contact the Author__
+If you have any further comments, improvements, or constructive criticism, feel free to contact me at: 
+* __Email__: jamisoncozart@gmail.com
+* __LinkedIn__: https://www.linkedin.com/in/jamisoncozart/
+* __GitHub__: https://github.com/jamisoncozart
+
 <hr>
+
 If you enjoyed this article and found it useful, please consider starring this repository and sharing it with anyone you think would find it useful.
 
-If you have any further comments, improvements, or constructive criticism, feel free to email me at: jamisoncozart@gmail.com
 
-<hr>
+_Lisense: MIT_
 
 &copy; 2020 - Jamison Cozart

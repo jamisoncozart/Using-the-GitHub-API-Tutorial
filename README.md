@@ -305,16 +305,70 @@ The last step of the process is retrieving data to place in the 'Languages Used:
 Intro
 To retrieve our project _languages used_, lets write a new request specifically to the URL we found in our JSON object:
 ```javascript
-
+$.get("https://api.github.com/repos/jamisoncozart/address-book/languages", function(languageData) {
+  for(let i = 0; i < Object.keys(languageData).length; i++) {
+    languages.push(Object.keys(languageData)[i]);
+  }
+});
 ```
+Here we use a for loop to loop through all the keys of the `languageData` object, and push them to a `languages` array. 
+
 While this is definitely possible, we are already receiving the URL for this API request inside the first JSON response object for our project. Because of this, we can refactor our code to use a nested request to access the `languages_url`:
 ```javascript
+const url = "https://api.github.com/users/jamisoncozart/repos?per_page=100";
 
+$.get(url, function(data) {
+  let sortedRepos = data.sort((a,b) => parseFloat(b.stargazers_count) - parseFloat(a.stargazers_count));
+  let repoName = sortedRepos[0].name;
+  let repoDescription = sortedRepos[0].description;
+  let repoLink = sortedRepos[0].html_url;
+  let repoStars = sortedRepos[0].stargazers_count;
+  let languages = [];
+  $.get(sortedRepos[0].languages_url, function(languageData) {
+    for(let i = 0; i < Object.keys(languageData).length; i++) {
+      languages.push(Object.keys(languageData)[i]);
+    }
+  });
+  $(document).ready(function() {
+    $("#repoLink").attr('href', repoLink);
+    $("#repoTitle").html(repoName);
+    $("#repoStars").html(repoStars);
+    $("#repoDescription").html(repoDescription);
+  });
+});
 ```
 Now that we have our data from the API, lets use more jQuery to finalize our project panel with our _languages used_ data:
 ```javascript
+const url = "https://api.github.com/users/jamisoncozart/repos?per_page=100";
 
+$.get(url, function(data) {
+  let sortedRepos = data.sort((a,b) => parseFloat(b.stargazers_count) - parseFloat(a.stargazers_count));
+  let repoName = sortedRepos[0].name;
+  let repoDescription = sortedRepos[0].description;
+  let repoLink = sortedRepos[0].html_url;
+  let repoStars = sortedRepos[0].stargazers_count;
+  let languages = [];
+  $.get(sortedRepos[0].languages_url, function(languageData) {
+    for(let i = 0; i < Object.keys(languageData).length; i++) {
+      languages.push(Object.keys(languageData)[i]);
+    }
+  });
+  $(document).ready(function() {
+    $("#repoLink").attr('href', repoLink);
+    $("#repoTitle").html(repoName);
+    $("#repoStars").html(repoStars);
+    $("#repoDescription").html(repoDescription);
+    let languageList = $("#repoLanguageList");
+    setTimeout(function() {
+      for(let i = 0; i < languages.length; i++) {
+        languageList.append(`<li><strong>${languages[i]}</strong></li>`);
+      }
+    });
+  });
+});
 ```
+Here we append a new `li` HTML element for each language inside out `languages` array. I have wrapped this code inside a `setTimeout()` function because we don't want our `languages` list to append until we have successfully retrieved our `languageData` from our nested request. Using `setTimeout()` without specifying a time as the second parameter will run our `for` loop after enough time has passed to recieve our `languageData` object before we try and append the data. You can read more on the different uses of the setTimeout() function [here](https://www.w3schools.com/jsref/met_win_settimeout.asp).
+
 For many APIs, this is a common workflow: making requests, parsing the JSON response object, storing the data you want, then doing something with that data. Now that you know how easy it is to use the GitHub API to retrieve anyone's profile data and repository information, consider some further exploration to get more practice with making API requests and using other features of GitHub's API.
 
 ## __Further Exploration__
@@ -322,6 +376,12 @@ For many APIs, this is a common workflow: making requests, parsing the JSON resp
 
 **Challenge:** 
 Using the GitHub API, add percents to each language used in your project based on the data from `languages_url` API link.
+
+### __Other ways to make API requests__
+
+* [The Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch)
+* [AJAX - The XMLHttpRequest Object](https://www.w3schools.com/js/js_ajax_http.asp)
+* [AJAX using jQuery](https://api.jquery.com/jquery.ajax/)
 
 ## __Example Projects__
 <hr>

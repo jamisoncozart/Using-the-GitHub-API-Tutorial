@@ -11,8 +11,7 @@ $.get(url, function(data) {
     for(let i = 0; i < Object.keys(languageData).length; i++) {
       languages.push(Object.keys(languageData)[i]);
     }
-  })
-  console.log(languages);
+  });
   $(document).ready(function() {
     $("#repoLink").attr('href', repoLink);
     $("#repoTitle").html(repoName);
@@ -20,11 +19,9 @@ $.get(url, function(data) {
     $("#repoDescription").html(repoDescription);
     let languageList = $("#repoLanguageList");
     setTimeout(function() {
-      console.log(languages.length);
       for(let i = 0; i < languages.length; i++) {
-        console.log(languages[i]);
         languageList.append(`<li><strong>${languages[i]}</strong></li>`);
       }
     });
-  })
-})
+  });
+});

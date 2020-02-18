@@ -82,9 +82,9 @@ The easiest way to get started is to clone this GitHub repo onto your desktop:
 ```bash
 cd Desktop
 
-git clone https://github.com/jamisoncozart/Using-the-GitHub-API
+git clone https://github.com/jamisoncozart/Using-the-GitHub-API-Tutorial
 
-cd Using-the-GitHub-API
+cd Using-the-GitHub-API-Tutorial
 ```
 After this, open this project in your preferred text-editor. For VSCode, simply type:
 ```

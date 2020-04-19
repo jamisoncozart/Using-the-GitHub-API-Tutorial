@@ -9,7 +9,6 @@ As a beginner dev like myself, you probably have a simple portfolio page showcas
 **Here's what you will be building in this tutorial**
 
 ![Screenshot of UI](https://i.imgur.com/Q5x7QPU.png)
-
 ## __The GitHub API__
 
 For anyone unfamiliar with the term, API stands for Application Programming Interface. The term API is thrown around a lot in the developer community, and can represent a wide variety of different software interfaces. Because of this, I will not spend too much time explaining, and instead link to the [Wikipedia page](https://en.wikipedia.org/wiki/Application_programming_interface) for your further reading. The basic purpose of an API is for software programs to easily communicate and exchange data between one another. Fortunately for all developers GitHub has a fantastic, simple-to-use API that we can use to access the data from each of our project repositories in seconds. If you’re more like me, you might prefer to read the [Official Documentation](https://developer.github.com/v3/).

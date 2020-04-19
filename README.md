@@ -7,6 +7,7 @@ ___By Jamison Cozart___
 As a beginner dev like myself, you probably have a simple portfolio page showcasing your projects and previous work experience. You’ve taken the time to meticulously add the project titles, the description, and even the languages used for each of your projects. But if you’re like me you’ve also realized the arduous task of continually updating these projects with the newer and improved projects you will continue to make through your journey as a developer. I’m writing this article, as my first blog post ever, to show you the beauty and simplicity of using GitHub’s API’s to your advantage.
 
 Here's what you will be building in this tutorial
+
 ![Screenshot of UI](https://i.imgur.com/Q5x7QPU.png)
 
 ## __The GitHub API__
